@@ -39,7 +39,7 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base
+    - r-base  {{ r_version }}
     - freetype
     - harfbuzz
     - fribidi
@@ -48,7 +48,7 @@ requirements:
     - r-cpp11 >=0.2.1
     - r-systemfonts >=1.0.0
   run:
-    - r-base
+    - r-base  {{ r_version }}
     - {{ native }}gcc-libs         # [win]
     - freetype
     - harfbuzz
