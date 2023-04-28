@@ -15,9 +15,15 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 4
+    skip: True # [aarch64 or s390x or ppc64le or arm64]
+
   rpaths:
     - lib/R/lib/
     - lib/
+
+  # weird error on windows
+  missing_dso_whitelist:
+    - $RPATH/R.dll  # [win]
 
 requirements:
   build:
@@ -25,9 +31,8 @@ requirements:
     - r-cpp11                    # [build_platform != target_platform]
     - r-systemfonts              # [build_platform != target_platform]
     - {{ compiler('c') }}              # [not win]
-    - {{ compiler('m2w64_c') }}        # [win]
     - {{ compiler('cxx') }}            # [not win]
-    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{native}}toolchain        # [win]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}sed               # [win]
     - {{ posix }}grep              # [win]
@@ -44,7 +49,7 @@ requirements:
     - harfbuzz
     - fribidi
     - glib  # [osx]
-    - libglib  # [osx]
+    #- libglib  # [osx]
     - r-cpp11 >=0.2.1
     - r-systemfonts >=1.0.0
   run:
@@ -74,6 +79,12 @@ extra:
   recipe-maintainers:
     - conda-forge/r
     - izahn
+  anaconda-services:
+    ref:  https://anaconda.zendesk.com/agent/tickets/35116
+    reason: "needed for r-devtools"
+    recipe-maintainers:
+      - bkreider
+
 
 # Package: textshaping
 # Title: Bindings to the 'HarfBuzz' and 'Fribidi' Libraries for Text Shaping
