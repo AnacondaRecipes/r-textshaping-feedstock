@@ -15,7 +15,7 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 4
-    skip: True # [aarch64 or s390x or ppc64le or arm64]
+  skip: True # [aarch64 or s390x or ppc64le or arm64]
 
   rpaths:
     - lib/R/lib/
