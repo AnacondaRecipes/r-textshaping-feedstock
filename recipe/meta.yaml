@@ -55,6 +55,7 @@ requirements:
   run:
     - r-base  {{ r_version }}
     - {{ native }}gcc-libs         # [win]
+    - m2w64-libwinpthread-git      # [win]
     - freetype
     - harfbuzz
     - fribidi
